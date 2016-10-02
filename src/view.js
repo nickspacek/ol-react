@@ -6,8 +6,8 @@ export default class View extends OLComponent {
   constructor(props) {
     super(props);
     this.view = new ol.View();
-    //this.view.on("change:center", this.onCenterChanged, this);
-    //this.view.on("change:resolution", this.onResolutionChanged, this);
+    this.view.on("change:center", this.onCenterChanged, this);
+    this.view.on("change:resolution", this.onResolutionChanged, this);
   }
 
   onCenterChanged (event) {
@@ -49,6 +49,10 @@ export default class View extends OLComponent {
     this.updateFromProps_(newProps);
   }
 }
+
+View.defaultProps = {
+  onNavigation: () => {}
+};
 
 View.propTypes = {
 	center: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
