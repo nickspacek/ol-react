@@ -33,7 +33,10 @@ export default class View extends OLComponent {
   }
 
   updateFromProps_ (props, isMounting) {
-    if (isMounting) {
+    // When a new <View /> is passed to the Map view property, the props
+    // object is a new one. When this is called for the same <View /> the
+    // props object is reused. This approach works but does not seem ideal.
+    if (isMounting || props !== this.props) {
       // Update the center and the resolution of the view only when it is
       // mounted the first time but not when the properties are updated
       this.updateCenterAndResolutionFromProps_(props)
