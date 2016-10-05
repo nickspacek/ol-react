@@ -24,6 +24,9 @@ export default class Feature extends OLComponent {
       if(props.style.stroke) {
         result.stroke = new ol.style.Stroke(props.style.stroke);
       }
+      if(props.style.image) {
+        result.image = props.style.image;
+      }
       result = new ol.style.Style(result);
     }
     return result;
@@ -41,6 +44,10 @@ export default class Feature extends OLComponent {
 
   componentWillReceiveProps(newProps) {
     this.updateFromProps(newProps);
+  }
+
+  componentWillUnmount() {
+    this.context.source.removeFeature(this.feature);
   }
 }
 
